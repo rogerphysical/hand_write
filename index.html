@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="zh-TW">
+	<head>
+		<meta charset="utf-8">
+		<title>write down</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<script type="text/javascript" src="FileSaver.js"></script>
+	</head>
+	<body>
+		<div id="paper" onmousedown="change_color_d(event.offsetX, event.offsetY)" onmouseup="change_color_u()" onmousemove="change_color_m(event.offsetX, event.offsetY)">
+			<canvas id="write"></canvas>
+		</div>
+
+		<div class="footer">
+			Copyright &copy; 2021 坴奉Roger
+		</div>
+
+		<div id="tool_box">
+			<div class="tool" onclick="start(this)">start</div>
+		</div>
+
+	</body>
+</html>	
