@@ -126,15 +126,9 @@ function output() {
 	});
 }
 $.ajax({
-        type: 'POST',
-        url: "train.py",
-        data: {param: target}, //passing some input here
-        dataType: "text",
-        success: function(response){
-           output = response;
-           alert(output);
-        }
-}).done(function(data){
-    console.log(data);
-    alert(data);
+	type: "POST",
+	url: "train.py",
+	data: { param: " "}
+	}).done(function() {
+		alert("OK");
 });
