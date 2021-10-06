@@ -25,6 +25,11 @@ window.onload = function() {
 	prepare();
 }
 
+//change_sym
+function change_sym() {
+	
+}
+
 //reset
 function reset() {
 	write.width = paper.offsetWidth;
@@ -112,10 +117,10 @@ function output() {
 	saveAs(blob_target_on, "target_on.json");
 
 	//target_offline
-	var write = document.getElementById("write");
-	write.toBlob(function(blob) {
-		saveAs(blob, "target_off.png");
-	});
+	// var write = document.getElementById("write");
+	// write.toBlob(function(blob) {
+	// 	saveAs(blob, "target_off.png");
+	// });
 }
 // $.ajax({
 // 	type: "POST",
