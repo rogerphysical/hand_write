@@ -13,24 +13,16 @@ var cont = 0;
 //output
 var target = {};
 
-function start(th) {
-	document.getElementById('tool_box').style.bottom = '0vh';
-
+window.onload = function() {
 	paper = document.getElementById('paper');
 	write = document.getElementById('write');
 
-	paper.style.height = 'calc(100vh - 100px)';
-	setTimeout(()=> reset(), 1000);
+	reset();
 
 	tool = write.getContext('2d');
 
 	//觸控
 	prepare();
-
-	th.setAttribute("onclick", "reset()");
-	th.innerHTML = 'reset';
-
-	document.getElementById('tool_box').innerHTML += '<div class="tool" onclick="output()">output</div>';
 }
 
 //reset
@@ -97,7 +89,7 @@ function prepare(){
 		paper_rect = paper.getBoundingClientRect();
 		paper_left = paper_rect.x;
 		paper_top = paper_rect.y;
-		change_color_d(e.changedTouches[0].clientX-co_paper_left, e.changedTouches[0].clientY-co_paper_top);
+		change_color_d(e.changedTouches[0].clientX-paper_left, e.changedTouches[0].clientY-paper_top);
 	});
 	write.addEventListener('touchend', function (e) {
 		// e.preventDefault();
@@ -105,7 +97,7 @@ function prepare(){
 	});
 	write.addEventListener('touchmove', function (e) {
 		e.preventDefault();
-		change_color_m(e.changedTouches[0].clientX-co_paper_left, e.changedTouches[0].clientY-co_paper_top);
+		change_color_m(e.changedTouches[0].clientX-paper_left, e.changedTouches[0].clientY-paper_top);
 	});
 }
 
@@ -125,10 +117,12 @@ function output() {
 		saveAs(blob, "target_off.png");
 	});
 }
-$.ajax({
-	type: "POST",
-	url: "train.py",
-	data: { param: " "}
-	}).done(function() {
-		alert("OK");
-});
+// $.ajax({
+// 	type: "POST",
+// 	url: "train.py",
+// 	data: { target: target},
+// 	// dataType: 'json',
+// 	success: function(response) { console.log(response); }
+// 	}).done(function() {
+// 		// alert("OK");
+// });

@@ -7,6 +7,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script type="text/javascript" src="script.js"></script>
 		<script type="text/javascript" src="FileSaver.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
 	</head>
 	<body>
 		<div id="paper" onmousedown="change_color_d(event.offsetX, event.offsetY)" onmouseup="change_color_u()" onmousemove="change_color_m(event.offsetX, event.offsetY)">
@@ -18,7 +22,18 @@
 		</div>
 
 		<div id="tool_box">
-			<div class="tool" onclick="start(this)">start</div>
+			<div class="tool" onclick="reset()">reset</div>
+
+			<div class="tool symbow" onclick="reset()">
+				<div class="center" style="height: 40%;">write:</div>
+				<div class="center" style="height: 60%;">
+					$
+					\int \tan^{-1}(x^2)dx
+					$
+				</div>
+			</div>
+
+			<div class="tool" onclick="output()">output</div>
 		</div>
 
 	</body>
