@@ -4,16 +4,17 @@
 }
 body {
 	margin: 0;
+	background-color: #000;
 }
 #paper {
 	width: 100%;
-	height: calc(100vh - 100px);
+	height: calc(100vh - 200px);
 	overflow: hidden;
 
 	margin-top: 100px;
 
 	transition: height 1s;
-	background-color: #000;
+	/*background-color: #000;*/
 }
 #write{
 	border: solid 10px #000;
