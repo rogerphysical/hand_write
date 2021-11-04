@@ -16,10 +16,9 @@ var target = {};
 window.onload = function() {
 	paper = document.getElementById('paper');
 	write = document.getElementById('write');
+	tool = write.getContext('2d');
 
 	reset();
-
-	tool = write.getContext('2d');
 
 	//觸控
 	prepare();
@@ -32,8 +31,10 @@ function change_sym() {
 
 //reset
 function reset() {
-	write.width = paper.offsetWidth;
-	write.height = paper.offsetHeight;
+	write.width = paper.offsetWidth-20;
+	write.height = paper.offsetHeight-20;
+
+	tool.lineWidth = 6;
 
 	//次數歸0
 	times = 0;

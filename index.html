@@ -2,18 +2,22 @@
 <html lang="zh-TW">
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 		<title>write down</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script type="text/javascript" src="script.js"></script>
+
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 		<script type="text/javascript" src="FileSaver.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 		<script type="text/x-mathjax-config">
 			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 		</script>
+		
 	</head>
 	<body>
-		<div id="paper" onmousedown="change_color_d(event.offsetX, event.offsetY)" onmouseup="change_color_u()" onmousemove="change_color_m(event.offsetX, event.offsetY)">
+		<div id="paper" class="center" onmousedown="change_color_d(event.offsetX, event.offsetY)" onmouseup="change_color_u()" onmousemove="change_color_m(event.offsetX, event.offsetY)">
 			<canvas id="write"></canvas>
 		</div>
 
