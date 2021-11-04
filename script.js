@@ -2,7 +2,7 @@ var paper = 0;
 var write = 0;
 var tool = 0;
 
-//時間開始\結束\次數
+// 時間開始\結束\次數
 var time_start = 0;
 var time_mid = 0;
 var time_diff = 0;
@@ -10,7 +10,7 @@ var times = 0;
 
 var cont = 0;
 
-//output
+// output
 var target = {};
 
 window.onload = function() {
@@ -20,23 +20,23 @@ window.onload = function() {
 
 	reset();
 
-	//觸控
+	// 觸控
 	prepare();
 }
 
-//change_sym
+// change_sym
 function change_sym() {
 	
 }
 
-//reset
+// reset
 function reset() {
 	write.width = paper.offsetWidth-20;
 	write.height = paper.offsetHeight-20;
 
 	tool.lineWidth = 6;
 
-	//次數歸0
+	// 次數歸0
 	times = 0;
 
 	target = {};
@@ -44,54 +44,57 @@ function reset() {
 	target['height'] = write.height;
 }
 
-//判斷是否已下筆
+// 判斷是否已下筆
 var write_down = 0;
 
-//滑鼠
+// 滑鼠
 function change_color_d(x, y) {
 	write_down = 1
 	tool.moveTo(x, y);
 
-	//次數\時間
-	times += 1;
-	time_start = new Date().getTime();
-	time_diff = times == 1?0:time_start-time_mid;
+	// 時間
+	if (times == 0){
+		time_start = new Date().getTime();
+	}
+	time_mid = new Date().getTime();
+	// time_diff = times == 0?0:time_start-time_mid;
 	
-	//cont
-	cont = [[0, x, y]];
+	// cont
+	cont = [[time_mid-time_start, x, y]];
 
 	// console.log(x, y, time_diff, times);
 }
 function change_color_u() {
 	write_down = 0
 
-	target[times] = {'time_diff': time_diff, 'cont': cont};
+	target[times] = cont;
+	times += 1;
 
 	// console.log(target);
 }
 function change_color_m(x, y) {
 	if (write_down) {
 		tool.lineTo(x, y);
-		tool.stroke();//繪製
+		tool.stroke();// 繪製
 
-		//時間
+		// 時間
 		time_mid = new Date().getTime()
 
-		//cont
+		// cont
 		cont.push([time_mid-time_start, x, y]);
 
 		// console.log(x, y, time_mid-time_start);
 	}
 }
 
-//觸控
+// 觸控
 var paper_rect = 0;
 var paper_left = 0;
 var paper_top = 0;
 function prepare(){
 	write.addEventListener('touchstart', function (e) {
 		// e.preventDefault();
-		//觸控資訊
+		// 觸控資訊
 		paper_rect = paper.getBoundingClientRect();
 		paper_left = paper_rect.x;
 		paper_top = paper_rect.y;
@@ -107,12 +110,12 @@ function prepare(){
 	});
 }
 
-//output
+// output
 function output() {
 	target['times'] = times;
 	console.log(target);
 
-	//target_online
+	// target_online
 	var target_on = JSON.stringify(target);
 	var blob_target_on = new Blob([target_on], {type: "text/plain;charset=utf-8"});
 	saveAs(blob_target_on, "target_on.json");
