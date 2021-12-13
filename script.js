@@ -5,7 +5,6 @@ var tool = 0;
 // 時間開始\結束\次數
 var time_start = 0;
 var time_mid = 0;
-var time_diff = 0;
 var times = 0;
 
 var cont = 0;
@@ -26,7 +25,9 @@ window.onload = function() {
 
 // change_sym
 function change_sym() {
-	
+	var xx = 'here';
+	document.getElementById('symbow').innerHTML = `
+	I am ${xx}.`;
 }
 
 // reset
@@ -34,7 +35,7 @@ function reset() {
 	write.width = paper.offsetWidth-20;
 	write.height = paper.offsetHeight-20;
 
-	tool.lineWidth = 6;
+	tool.lineWidth = 4;
 
 	// 次數歸0
 	times = 0;
