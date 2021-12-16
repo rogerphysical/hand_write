@@ -13,6 +13,14 @@ var cont = 0;
 var target = {};
 
 window.onload = function() {
+	//網址
+	sym = 0;
+	if (location.search) {
+		var paras = location.search.substr(1).split('&')[0].split('=');
+		var sym = paras[0]=='sym'?paras[1]:0;
+	}
+	change_sym(sym);
+
 	paper = document.getElementById('paper');
 	write = document.getElementById('write');
 	tool = write.getContext('2d');
@@ -24,10 +32,24 @@ window.onload = function() {
 }
 
 // change_sym
-function change_sym() {
-	var xx = 'here';
-	document.getElementById('symbow').innerHTML = `
-	I am ${xx}.`;
+function change_sym(sym) {
+	sym = parseInt(sym)
+	switch(sym) {
+		case 0:
+			sym_text = '$ \\displaystyle \\frac{\\pi}{2} + 2k\\pi	$';
+			break;
+		//beta function
+		case 1:
+			sym_text = '$ \\displaystyle \\int_0^1 t^{x-1}(1-t)^{y-1} \\, \\mathrm{d}t $';
+			break;
+		//gamma function
+		case 2:
+			sym_text = '$ \\displaystyle \\int_0^\\infty t^{z-1}e^{-t} \\, \\mathrm{d}t	$';
+			break;
+		default:
+			sym_text = 'Number error.';
+	}
+	document.getElementById('symbow').innerHTML = sym_text;
 }
 
 // reset
