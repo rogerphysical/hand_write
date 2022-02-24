@@ -11,16 +11,17 @@ var cont = 0;
 
 // output
 var target = {};
-
+var sym = 0;
 window.onload = function() {
 	//網址
 	sym = 0;
 	if (location.search) {
 		var paras = location.search.substr(1).split('&')[0].split('=');
-		var sym = paras[0]=='sym'?paras[1]:0;
+		sym = paras[0]=='sym'?paras[1]:0;
 	}
 	change_sym(sym);
 
+	//object
 	paper = document.getElementById('paper');
 	write = document.getElementById('write');
 	tool = write.getContext('2d');
@@ -36,7 +37,7 @@ function change_sym(sym) {
 	sym = parseInt(sym)
 	switch(sym) {
 		case 0:
-			sym_text = '$ \\displaystyle \\frac{\\pi}{2} + 2k\\pi	$';
+			sym_text = '$ \\displaystyle \\frac{\\pi}{2} + 2k\\pi $';
 			break;
 		//beta function
 		case 1:
@@ -46,10 +47,24 @@ function change_sym(sym) {
 		case 2:
 			sym_text = '$ \\displaystyle \\int_0^\\infty t^{z-1}e^{-t} \\, \\mathrm{d}t	$';
 			break;
+
+		case -1:
+			sym_text = 'thanks for writing';
+			break;
 		default:
-			sym_text = 'Number error.';
+			sym_text = 'sym range(0~2)';
 	}
 	document.getElementById('symbow').innerHTML = sym_text;
+}
+
+function next_sym() {
+	sym = parseInt(sym)
+	if (sym < 2 && sym > -2) {
+		window.location.href = '?sym='+String(sym+1);
+	}
+	else {
+		window.location.href = '?sym='+String(-1);
+	}
 }
 
 // reset
@@ -141,7 +156,7 @@ function output() {
 	// target_online
 	var target_on = JSON.stringify(target);
 	var blob_target_on = new Blob([target_on], {type: "text/plain;charset=utf-8"});
-	saveAs(blob_target_on, "target_on.json");
+	saveAs(blob_target_on, "sym_"+String(sym)+".json");
 
 	//target_offline
 	// var write = document.getElementById("write");
