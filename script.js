@@ -2,15 +2,14 @@ var paper = 0;
 var write = 0;
 var tool = 0;
 
-// 時間開始\結束\次數
-var time_start = 0;
+// 時間
 var time_mid = 0;
-var times = 0;
-
-var cont = 0;
 
 // output
 var target = {};
+var stroke = [];
+var cont = NaN;
+
 var sym = 0;
 window.onload = function() {
 	//網址
@@ -74,12 +73,9 @@ function reset() {
 
 	tool.lineWidth = 4;
 
-	// 次數歸0
-	times = 0;
-
+	// 歸0
 	target = {};
-	target['width'] = write.width;
-	target['height'] = write.height;
+	stroke = [];
 }
 
 // 判斷是否已下筆
@@ -91,22 +87,15 @@ function change_color_d(x, y) {
 	tool.moveTo(x, y);
 
 	// 時間
-	if (times == 0){
-		time_start = new Date().getTime();
-	}
 	time_mid = new Date().getTime();
-	// time_diff = times == 0?0:time_start-time_mid;
 	
 	// cont
-	cont = [[time_mid-time_start, x, y]];
-
-	// console.log(x, y, time_diff, times);
+	cont = [[x, y, time_mid]];
 }
 function change_color_u() {
 	write_down = 0
 
-	target[times] = cont;
-	times += 1;
+	stroke.push(cont);
 
 	// console.log(target);
 }
@@ -119,9 +108,7 @@ function change_color_m(x, y) {
 		time_mid = new Date().getTime()
 
 		// cont
-		cont.push([time_mid-time_start, x, y]);
-
-		// console.log(x, y, time_mid-time_start);
+		cont.push([x, y, time_mid]);
 	}
 }
 
@@ -150,26 +137,12 @@ function prepare(){
 
 // output
 function output() {
-	target['times'] = times;
-	console.log(target);
+	target['name'] = sym;
+	target['stroke'] = stroke;
+	// console.log(target);
 
-	// target_online
+	// target
 	var target_on = JSON.stringify(target);
 	var blob_target_on = new Blob([target_on], {type: "text/plain;charset=utf-8"});
 	saveAs(blob_target_on, "sym_"+String(sym)+".json");
-
-	//target_offline
-	// var write = document.getElementById("write");
-	// write.toBlob(function(blob) {
-	// 	saveAs(blob, "target_off.png");
-	// });
 }
-// $.ajax({
-// 	type: "POST",
-// 	url: "train.py",
-// 	data: { target: target},
-// 	// dataType: 'json',
-// 	success: function(response) { console.log(response); }
-// 	}).done(function() {
-// 		// alert("OK");
-// });
